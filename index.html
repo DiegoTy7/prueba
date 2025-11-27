@@ -1,837 +1,550 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>piste duarte diuego joel - Ingeniero en Sistemas</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Joelpiste Duarte - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 10px #ff0040, 0 0 20px #ff0040, 0 0 30px #ff0040, 0 0 40px #ff0040;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
 
-    /* Header */
-    header {
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-    }
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 0, 64, 0.5), 0 0 40px rgba(255, 0, 64, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 0, 64, 0.8), 0 0 60px rgba(255, 0, 64, 0.5);
+            }
+        }
 
-    nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        @keyframes progress-pulse {
+            0%, 100% {
+                box-shadow: 0 0 10px #ff0040, inset 0 0 10px #ff0040;
+            }
+            50% {
+                box-shadow: 0 0 20px #ff0040, inset 0 0 20px #ff0040;
+            }
+        }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #667eea;
-    }
+        .neon-text {
+            animation: neon-flicker 3s infinite alternate;
+        }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
+        .neon-grid {
+            background-image: 
+                linear-gradient(rgba(255, 0, 64, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 64, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
 
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
+        .neon-button {
+            background: linear-gradient(135deg, #ff0040, #ff3366);
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #ff0040;
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.5);
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+        }
 
-    nav a:hover {
-      color: #667eea;
-    }
+        .neon-button:hover {
+            box-shadow: 0 0 30px rgba(255, 0, 64, 0.8), 0 0 60px rgba(255, 0, 64, 0.5);
+            transform: translateY(-2px);
+        }
 
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6rem 2rem 2rem;
-      background: url('https://images.unsplash.com/photo-1517694712202-14f94cbca5f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover
-        no-repeat;
-      position: relative;
-      z-index: 1;
-      color: white;
-    }
+        .neon-button-secondary {
+            background: transparent;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #ff0040;
+            color: white;
+            cursor: pointer;
+        }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: -1;
-    }
+        .neon-button-secondary:hover {
+            background: rgba(255, 0, 64, 0.1);
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.5);
+        }
 
-    .hero-content {
-      max-width: 1200px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      /* Two columns for text and image */
-      gap: 4rem;
-      align-items: center;
-    }
+        .neon-button-whatsapp {
+            background: linear-gradient(135deg, #ff3366, #ff6644);
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #ff3366;
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
 
-    .hero-text {
-      text-align: left;
-      /* Align text to the left */
-    }
+        .neon-button-whatsapp:hover {
+            box-shadow: 0 0 30px rgba(255, 51, 102, 0.8);
+            transform: translateY(-2px);
+        }
 
-    .hero-text h1 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-      animation: fadeIn 1s ease-in-out;
-    }
+        .neon-border {
+            border: 2px solid #ff0040;
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.5), inset 0 0 20px rgba(255, 0, 64, 0.2);
+            animation: pulse-glow 2s infinite;
+        }
 
-    .hero-text .highlight {
-      color: #667eea;
-    }
+        .skill-card {
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.9), rgba(30, 30, 40, 0.9));
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 0, 64, 0.3);
+        }
 
-    .hero-text h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      font-weight: 500;
-      animation: slideInRight 1s ease-in-out;
-    }
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff0040;
+            box-shadow: 0 0 30px rgba(255, 0, 64, 0.5);
+        }
 
-    .hero-text p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      animation: slideInLeft 1s ease-in-out;
-    }
+        .neon-progress {
+            background: linear-gradient(90deg, #ff0040, #ff3366, #ff0040);
+            animation: progress-pulse 2s infinite;
+            border-radius: 9999px;
+            height: 100%;
+            transition: width 1s ease;
+        }
 
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+        .neon-badge {
+            box-shadow: 0 0 10px rgba(255, 0, 64, 0.5);
+        }
 
-    .btn {
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none;
-      display: inline-block;
-      align-items: center;
-    }
+        .about-card {
+            background: linear-gradient(135deg, rgba(30, 30, 40, 0.8), rgba(20, 20, 30, 0.8));
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 0, 64, 0.2);
+        }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
+        .about-card:hover {
+            border-color: #ff0040;
+            box-shadow: 0 0 25px rgba(255, 0, 64, 0.4);
+            transform: translateY(-5px);
+        }
 
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-    }
+        .hobby-item {
+            background: rgba(30, 30, 40, 0.6);
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(255, 0, 64, 0.3);
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
 
-    .btn-secondary {
-      background: white;
-      color: #667eea;
-      border: 2px solid #667eea;
-    }
+        .hobby-item:hover {
+            border-color: #ff0040;
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.4);
+        }
 
-    .btn-secondary:hover {
-      background: #667eea;
-      color: white;
-    }
+        .social-link {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 0, 64, 0.5);
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
 
-    .btn-whatsapp {
-      background-color: #25D366;
-      color: white;
-    }
+        .social-link:hover {
+            background: rgba(255, 0, 64, 0.2);
+            border-color: #ff0040;
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.5);
+            transform: translateY(-3px);
+        }
 
-    .btn-whatsapp:hover {
-      background-color: #128C7E;
-    }
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
 
-    /* Photo Section */
-    .hero-photo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
 
-    .photo-container {
-      position: relative;
-      width: 350px;
-      height: 350px;
-    }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ff0040, #ff3366);
+            border-radius: 6px;
+        }
 
-    .photo-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #ff3366, #ff6644);
+        }
 
-    .photo-placeholder {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      color: white;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    }
+        .chat-window {
+            display: none;
+            position: fixed;
+            bottom: 6rem;
+            right: 1.5rem;
+            width: 24rem;
+            height: 500px;
+            background: rgb(17, 24, 39);
+            border-radius: 1rem;
+            box-shadow: 0 0 50px rgba(255, 0, 64, 0.5);
+            z-index: 50;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid #ff0040;
+        }
 
-    /* Skills Section */
-    .skills {
-      padding: 4rem 2rem;
-      background: white;
-    }
+        .chat-window.active {
+            display: flex;
+        }
 
-    .skills-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        .nav-link {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
 
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      color: #2d3748;
-      margin-bottom: 3rem;
-    }
+        .nav-link.active {
+            color: #ef4444;
+        }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-
-    .skill-card {
-      background: #f7fafc;
-      padding: 2rem;
-      border-radius: 15px;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: 2px solid transparent;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
-      border-color: #667eea;
-    }
-
-    .skill-card i {
-      font-size: 3rem;
-      color: #667eea;
-      margin-bottom: 1rem;
-    }
-
-    .skill-card h3 {
-      font-size: 1.3rem;
-      color: #2d3748;
-      margin-bottom: 0.5rem;
-    }
-
-    .experience-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 0.3rem 1rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-    }
-
-    /* About Section */
-    .about {
-      padding: 4rem 2rem;
-      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-    }
-
-    .about-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .about-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .about-card i {
-      font-size: 2.5rem;
-      color: #764ba2;
-      margin-bottom: 1rem;
-    }
-
-    .about-card h3 {
-      font-size: 1.5rem;
-      color: #2d3748;
-      margin-bottom: 1rem;
-    }
-
-    .about-card p {
-      color: #4a5568;
-      line-height: 1.8;
-    }
-
-    /* Hobbies Section */
-    .hobbies {
-      padding: 4rem 2rem;
-      background: white;
-    }
-
-    .hobbies-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* Footer */
-    footer {
-      background: #2d3748;
-      color: white;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .social-links a {
-      color: white;
-      font-size: 1.5rem;
-      transition: color 0.3s;
-    }
-
-    .social-links a:hover {
-      color: #667eea;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        /* Stack text and image on smaller screens */
-        padding: 2rem;
-      }
-
-      .hero-text {
-        text-align: center;
-        /* Center text on smaller screens */
-      }
-
-      .hero-text h1 {
-        font-size: 2rem;
-      }
-
-      .hero-text h2 {
-        font-size: 1.2rem;
-      }
-
-      nav ul {
-        gap: 1rem;
-      }
-
-      nav {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .photo-container {
-        width: 250px;
-        height: 250px;
-      }
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideInLeft {
-      from {
-        transform: translateX(-50px);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideInRight {
-      from {
-        transform: translateX(50px);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-  </style>
+        .nav-link:hover {
+            color: #f87171;
+        }
+    </style>
 </head>
-
-<body>
-  <!-- Header -->
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <a class="navbar-brand logo" href="#">AGVN</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#inicio">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#habilidades">Habilidades</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#sobre-mi">Sobre Mí</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contacto">Contacto</a>
-            </li>
-          </ul>
+<body class="bg-black text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-red-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="text-2xl font-bold neon-text">DJD</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="nav-link capitalize text-gray-300" data-section="inicio">Inicio</a>
+                    <a href="#habilidades" class="nav-link capitalize text-gray-300" data-section="habilidades">Habilidades</a>
+                    <a href="#sobre-mi" class="nav-link capitalize text-gray-300" data-section="sobre-mi">Sobre mí</a>
+                    <a href="#hobbies" class="nav-link capitalize text-gray-300" data-section="hobbies">Hobbies</a>
+                    <a href="#contacto" class="nav-link capitalize text-gray-300" data-section="contacto">Contacto</a>
+                </div>
+            </div>
         </div>
-      </div>
     </nav>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="inicio">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1 class="display-4">Hola, soy <span class="highlight">Ángel Gabriel Vidal Novelo</span></h1>
-        <h2 class="lead">Ingeniero en Sistemas</h2>
-        <p>Desarrollador web apasionado con 3 años de experiencia en HTML, CSS y Java. Me especializo en crear páginas
-          web modernas y funcionales, trabajando en equipo y motivando a otros desarrolladores.</p>
-        <div class="cta-buttons">
-          <a href="#contacto" class="btn btn-primary btn-lg">Contáctame</a>
-          <a href="#habilidades" class="btn btn-secondary btn-lg">Ver Habilidades</a>
-          <a href="https://wa.me/YOUR_WHATSAPP_NUMBER" class="btn btn-whatsapp btn-lg" target="_blank"><i
-              class="fab fa-whatsapp"></i> WhatsApp</a>
+    <!-- Hero Section -->
+    <section id="inicio" class="min-h-screen flex items-center justify-center pt-16 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 neon-grid opacity-20"></div>
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-6 text-center md:text-left">
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                    Hola, soy <span class="neon-text">Diego Joelpiste Duarte</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl text-red-400">Ingeniero en Sistemas</h2>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Desarrollador web apasionado con 3 años de experiencia en HTML, CSS y Java. Me especializo en crear
+                    páginas web modernas y funcionales, trabajando en equipo y motivando a otros desarrolladores.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                    <a href="#contacto" class="neon-button">Contáctame</a>
+                    <a href="#habilidades" class="neon-button-secondary">Ver Habilidades</a>
+                    <a href="https://wa.me/YOUR_WHATSAPP_NUMBER" target="_blank" rel="noopener noreferrer" class="neon-button-whatsapp">
+                        <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <div class="relative">
+                    <div class="w-72 h-72 rounded-2xl overflow-hidden neon-border">
+                        <div class="w-full h-full bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center text-9xl">
+                            👤
+                        </div>
+                    </div>
+                    <div class="absolute -inset-4 bg-red-500 opacity-20 blur-3xl rounded-full -z-10"></div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="hero-photo">
-        <div class="photo-container">
-          <!-- Reemplaza la siguiente línea con tu foto -->
-           <img src="hola.jpg" alt="Ángel Gabriel Vidal Novelo"> 
-          <!--<div class="photo-placeholder">
-            <i class="fas fa-user"></i>
-          </div>-->
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Skills Section -->
-  <section class="skills" id="habilidades">
-    <div class="skills-container">
-      <h2 class="section-title">Mis Habilidades</h2>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body text-center">
-              <i class="fab fa-html5 fa-3x mb-3"></i>
-              <h5 class="card-title">HTML5</h5>
-              <p class="card-text">Desarrollo de estructuras web semánticas y accesibles.</p>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90"
-                  aria-valuemin="0" aria-valuemax="100">90%</div>
-              </div>
-              <span class="experience-badge">3 años</span>
+    <!-- Skills Section -->
+    <section id="habilidades" class="py-20 px-4 bg-gradient-to-b from-black to-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text">Mis Habilidades</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="skill-card">
+                    <div class="text-6xl mb-4">🌐</div>
+                    <h3 class="text-xl font-bold mb-2">HTML5</h3>
+                    <div class="w-full bg-gray-800 rounded-full h-2 mb-3 overflow-hidden">
+                        <div class="neon-progress" style="width: 90%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400">90%</p>
+                    <span class="inline-block mt-2 px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm neon-badge">3 años</span>
+                </div>
+                <div class="skill-card">
+                    <div class="text-6xl mb-4">🎨</div>
+                    <h3 class="text-xl font-bold mb-2">CSS3</h3>
+                    <div class="w-full bg-gray-800 rounded-full h-2 mb-3 overflow-hidden">
+                        <div class="neon-progress" style="width: 85%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400">85%</p>
+                    <span class="inline-block mt-2 px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm neon-badge">3 años</span>
+                </div>
+                <div class="skill-card">
+                    <div class="text-6xl mb-4">☕</div>
+                    <h3 class="text-xl font-bold mb-2">Java</h3>
+                    <div class="w-full bg-gray-800 rounded-full h-2 mb-3 overflow-hidden">
+                        <div class="neon-progress" style="width: 75%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400">75%</p>
+                    <span class="inline-block mt-2 px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm neon-badge">3 años</span>
+                </div>
+                <div class="skill-card">
+                    <div class="text-6xl mb-4">🅱️</div>
+                    <h3 class="text-xl font-bold mb-2">Bootstrap</h3>
+                    <div class="w-full bg-gray-800 rounded-full h-2 mb-3 overflow-hidden">
+                        <div class="neon-progress" style="width: 80%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400">80%</p>
+                    <span class="inline-block mt-2 px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm neon-badge">3 años</span>
+                </div>
+                <div class="skill-card">
+                    <div class="text-6xl mb-4">📝</div>
+                    <h3 class="text-xl font-bold mb-2">Word</h3>
+                    <div class="w-full bg-gray-800 rounded-full h-2 mb-3 overflow-hidden">
+                        <div class="neon-progress" style="width: 95%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400">95%</p>
+                    <span class="inline-block mt-2 px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm neon-badge">5 años</span>
+                </div>
+                <div class="skill-card">
+                    <div class="text-6xl mb-4">📊</div>
+                    <h3 class="text-xl font-bold mb-2">Excel</h3>
+                    <div class="w-full bg-gray-800 rounded-full h-2 mb-3 overflow-hidden">
+                        <div class="neon-progress" style="width: 85%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400">85%</p>
+                    <span class="inline-block mt-2 px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm neon-badge">5 años</span>
+                </div>
+                <div class="skill-card">
+                    <div class="text-6xl mb-4">📽️</div>
+                    <h3 class="text-xl font-bold mb-2">PowerPoint</h3>
+                    <div class="w-full bg-gray-800 rounded-full h-2 mb-3 overflow-hidden">
+                        <div class="neon-progress" style="width: 90%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400">90%</p>
+                    <span class="inline-block mt-2 px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm neon-badge">5 años</span>
+                </div>
+                <div class="skill-card">
+                    <div class="text-6xl mb-4">🎭</div>
+                    <h3 class="text-xl font-bold mb-2">Canva</h3>
+                    <div class="w-full bg-gray-800 rounded-full h-2 mb-3 overflow-hidden">
+                        <div class="neon-progress" style="width: 80%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400">80%</p>
+                    <span class="inline-block mt-2 px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm neon-badge">3 años</span>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body text-center">
-              <i class="fab fa-css3-alt fa-3x mb-3"></i>
-              <h5 class="card-title">CSS3</h5>
-              <p class="card-text">Diseño responsive y animaciones modernas.</p>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85"
-                  aria-valuemin="0" aria-valuemax="100">85%</div>
-              </div>
-              <span class="experience-badge">3 años</span>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body text-center">
-              <i class="fab fa-java fa-3x mb-3"></i>
-              <h5 class="card-title">Java</h5>
-              <p class="card-text">Desarrollo de aplicaciones robustas y escalables.</p>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
-                  aria-valuemin="0" aria-valuemax="100">75%</div>
-              </div>
-              <span class="experience-badge">3 años</span>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body text-center">
-              <i class="fab fa-bootstrap fa-3x mb-3"></i>
-              <h5 class="card-title">Bootstrap</h5>
-              <p class="card-text">Desarrollo de interfaces responsive y modernas.</p>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80"
-                  aria-valuemin="0" aria-valuemax="100">80%</div>
-              </div>
-              <span class="experience-badge">3 años</span>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body text-center">
-              <i class="far fa-file-word fa-3x mb-3"></i>
-              <h5 class="card-title">Word</h5>
-              <p class="card-text">Creación y edición de documentos profesionales.</p>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 95%;" aria-valuenow="95"
-                  aria-valuemin="0" aria-valuemax="100">95%</div>
-              </div>
-              <span class="experience-badge">5 años</span>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body text-center">
-              <i class="far fa-file-excel fa-3x mb-3"></i>
-              <h5 class="card-title">Excel</h5>
-              <p class="card-text">Análisis de datos y creación de hojas de cálculo.</p>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85"
-                  aria-valuemin="0" aria-valuemax="100">85%</div>
-              </div>
-              <span class="experience-badge">5 años</span>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body text-center">
-              <i class="far fa-file-powerpoint fa-3x mb-3"></i>
-              <h5 class="card-title">PowerPoint</h5>
-              <p class="card-text">Diseño de presentaciones impactantes.</p>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90"
-                  aria-valuemin="0" aria-valuemax="100">90%</div>
-              </div>
-              <span class="experience-badge">5 años</span>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body text-center">
-              <!-- Using a generic icon as Canva's official icon might not be available in Font Awesome -->
-              <i class="fas fa-palette fa-3x mb-3"></i>
-              <h5 class="card-title">Canva</h5>
-              <p class="card-text">Diseño gráfico para redes sociales y marketing.</p>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80"
-                  aria-valuemin="0" aria-valuemax="100">80%</div>
-              </div>
-              <span class="experience-badge">3 años</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- About Section -->
-  <section class="about" id="sobre-mi">
-    <div class="about-container">
-      <h2 class="section-title">Sobre Mí</h2>
-      <div class="about-content">
-        <div class="about-card">
-          <i class="fas fa-code"></i>
-          <h3>Desarrollo Web</h3>
-          <p>Con 3 años de experiencia, me apasiona crear páginas web modernas, funcionales y con diseños atractivos
-            que mejoran la experiencia del usuario.</p>
+    <!-- About Section -->
+    <section id="sobre-mi" class="py-20 px-4 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text">Sobre Mí</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="about-card">
+                    <div class="text-6xl mb-4">💻</div>
+                    <h3 class="text-2xl font-bold mb-3 text-red-400">Desarrollo Web</h3>
+                    <p class="text-gray-300 leading-relaxed">Con 3 años de experiencia, me apasiona crear páginas web modernas, funcionales y con diseños atractivos que mejoran la experiencia del usuario.</p>
+                </div>
+                <div class="about-card">
+                    <div class="text-6xl mb-4">👥</div>
+                    <h3 class="text-2xl font-bold mb-3 text-red-400">Trabajo en Equipo</h3>
+                    <p class="text-gray-300 leading-relaxed">Experiencia trabajando en equipos colaborativos, compartiendo conocimientos y contribuyendo al éxito de proyectos grupales.</p>
+                </div>
+                <div class="about-card">
+                    <div class="text-6xl mb-4">💡</div>
+                    <h3 class="text-2xl font-bold mb-3 text-red-400">Motivación</h3>
+                    <p class="text-gray-300 leading-relaxed">Me destaco por motivar a otros desarrolladores, fomentando un ambiente de aprendizaje continuo y crecimiento profesional.</p>
+                </div>
+            </div>
         </div>
-        <div class="about-card">
-          <i class="fas fa-users"></i>
-          <h3>Trabajo en Equipo</h3>
-          <p>Experiencia trabajando en equipos colaborativos, compartiendo conocimientos y contribuyendo al éxito de
-            proyectos grupales.</p>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="py-20 px-4 bg-gradient-to-b from-black to-gray-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 neon-text">Hobbies</h2>
+            <p class="text-xl text-gray-300 mb-8">
+                Me encanta relajarme y explorar mundos virtuales a través de los videojuegos. Algunos de mis favoritos incluyen:
+            </p>
+            <div class="space-y-4">
+                <div class="hobby-item">
+                    <span class="text-2xl mr-3">🎮</span>
+                    <span class="text-lg">The Legend of Zelda: Breath of the Wild</span>
+                </div>
+                <div class="hobby-item">
+                    <span class="text-2xl mr-3">🎮</span>
+                    <span class="text-lg">Minecraft</span>
+                </div>
+                <div class="hobby-item">
+                    <span class="text-2xl mr-3">🎮</span>
+                    <span class="text-lg">Super Mario Odyssey</span>
+                </div>
+            </div>
         </div>
-        <div class="about-card">
-          <i class="fas fa-lightbulb"></i>
-          <h3>Motivación</h3>
-          <p>Me destaco por motivar a otros desarrolladores, fomentando un ambiente de aprendizaje continuo y
-            crecimiento profesional.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto" class="py-12 px-4 bg-black border-t border-red-500/20">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="flex justify-center gap-6 mb-6">
+                <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="text-gray-400">&copy; 2025 Diego Joelpiste Duarte. Todos los derechos reservados.</p>
         </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- Hobbies Section -->
-  <section class="hobbies" id="hobbies">
-    <div class="hobbies-container">
-      <h2 class="section-title">Hobbies</h2>
-      <p class="text-center">
-        Me encanta relajarme y explorar mundos virtuales a través de los videojuegos. Algunos de mis favoritos incluyen:
-      </p>
-      <ul class="list-unstyled text-center">
-        <li><i class="fas fa-gamepad"></i> The Legend of Zelda: Breath of the Wild</li>
-        <li><i class="fas fa-gamepad"></i> Minecraft</li>
-        <li><i class="fas fa-gamepad"></i> Super Mario Odyssey</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="contacto">
-    <div class="social-links">
-      <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-      <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-      <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
-      <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-    </div>
-    <p>&copy; 2024 Ángel Gabriel Vidal Novelo. Todos los derechos reservados.</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <!-- Chatbot widget -->
-  <div class="chatbot" id="chatbot">
-    <button class="chatbot-button" id="chatbotToggle" aria-label="Abrir chat">
-      <i class="fas fa-robot"></i>
-      <span class="chatbot-dot" id="chatbotDot"></span>
+    <!-- Chatbot Button -->
+    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-16 h-16 rounded-full neon-button flex items-center justify-center z-50 shadow-lg shadow-red-500/50">
+        <svg id="chat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+        <svg id="close-icon" style="display: none;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
     </button>
 
-    <div class="chatbot-window" id="chatbotWindow" aria-hidden="true">
-      <div class="chatbot-header">
-        <div>
-          <strong>Asistente</strong>
-          <div class="chatbot-sub">Gemini Flash (demo)</div>
+    <!-- Chatbot Window -->
+    <div id="chat-window" class="chat-window">
+        <div class="bg-gradient-to-r from-red-600 to-pink-600 p-4 flex justify-between items-center">
+            <div>
+                <div class="font-bold">Asistente Virtual</div>
+                <div class="text-sm opacity-80">Diego AI Bot</div>
+            </div>
+            <button onclick="toggleChat()" class="hover:bg-white/20 p-2 rounded">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
         </div>
-        <div class="chatbot-controls">
-          <button id="chatbotClear" title="Limpiar"><i class="fas fa-trash"></i></button>
-          <button id="chatbotClose" title="Cerrar"><i class="fas fa-times"></i></button>
+        <div class="flex-1 p-4 overflow-y-auto">
+            <div class="text-center text-gray-400 mt-20">
+                <svg class="mx-auto mb-4 opacity-50" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+                <p>Inicia una conversación</p>
+            </div>
         </div>
-      </div>
-      <div class="chatbot-messages" id="chatbotMessages" role="log" aria-live="polite"></div>
-      <form class="chatbot-input" id="chatbotForm">
-        <input type="text" id="chatbotText" placeholder="Escribe tu mensaje..." autocomplete="off" />
-        <button type="submit" id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
-      </form>
+        <div class="p-4 border-t border-gray-800">
+            <div class="flex gap-2">
+                <input type="text" placeholder="Escribe tu mensaje..." class="flex-1 bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"/>
+                <button class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg transition-colors">Enviar</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <style>
-    /* Chatbot styles */
-    .chatbot { position: fixed; right: 24px; bottom: 24px; z-index: 2000; font-family: 'Segoe UI', Tahoma, sans-serif; }
-    .chatbot-button { width: 64px; height: 64px; border-radius: 50%; border: none; background: linear-gradient(135deg,#667eea,#764ba2); color: #fff; display:flex; align-items:center; justify-content:center; box-shadow:0 12px 30px rgba(118,75,162,0.25); cursor:pointer; position:relative; }
-    .chatbot-button i { font-size: 1.4rem; }
-    .chatbot-dot { position:absolute; top:8px; right:8px; width:12px; height:12px; background:#25D366; border-radius:50%; box-shadow:0 0 0 4px rgba(37,211,102,0.12); display:none; }
-      .chatbot-window { position:absolute; right:0; bottom:72px; width:380px; max-width:calc(100vw - 28px); height:520px; background:linear-gradient(180deg,#ffffff,#f7f9fc); border-radius:14px; box-shadow:0 30px 80px rgba(47,56,77,0.28); overflow:hidden; display:flex; flex-direction:column; transform:translateY(12px); opacity:0; pointer-events:none; transition:all .28s cubic-bezier(.2,.9,.2,1); }
-    .chatbot[aria-expanded="true"] .chatbot-window, .chatbot-window.open { transform:translateY(0); opacity:1; pointer-events:auto; }
-    .chatbot-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid rgba(15,23,42,0.04); }
-    .chatbot-sub { font-size:12px; color:#6b7280; }
-    .chatbot-controls button { background:transparent; border:none; color:#6b7280; margin-left:8px; cursor:pointer; }
-    .chatbot-messages { padding:12px; overflow:auto; flex:1 1 auto; display:flex; flex-direction:column; gap:10px; }
-    .chatbot-msg { max-width:82%; padding:10px 12px; border-radius:12px; font-size:14px; line-height:1.4; }
-    .chatbot-msg.user { align-self:flex-end; background: linear-gradient(135deg,#667eea,#764ba2); color:white; border-bottom-right-radius:6px; }
-    .chatbot-msg.assistant { align-self:flex-start; background:#f1f5f9; color:#0f172a; border-bottom-left-radius:6px; }
-    .chatbot-input { display:flex; gap:8px; padding:12px; border-top:1px solid rgba(15,23,42,0.04); }
-    .chatbot-input input { flex:1; padding:10px 12px; border-radius:999px; border:1px solid #e6edf3; outline:none; }
-    .chatbot-input button { background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; border:none; padding:8px 12px; border-radius:999px; cursor:pointer; }
-    .chatbot .meta { font-size:11px; color:#94a3b8; margin-top:4px; }
-    @media (max-width:420px) { .chatbot-window{ width: 95vw; height:60vh; } .chatbot-button{ width:56px; height:56px; } }
-  </style>
+    <script>
+        // Toggle chat window
+        function toggleChat() {
+            const chatWindow = document.getElementById('chat-window');
+            const chatIcon = document.getElementById('chat-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            chatWindow.classList.toggle('active');
+            
+            if (chatWindow.classList.contains('active')) {
+                chatIcon.style.display = 'none';
+                closeIcon.style.display = 'block';
+            } else {
+                chatIcon.style.display = 'block';
+                closeIcon.style.display = 'none';
+            }
+        }
 
-  <script>
-    // Chatbot JS (usa fetch). IMPORTANTE: por seguridad, no expongas tu API key en el cliente.
-    // Configura `GEMINI_ENDPOINT` y `API_KEY` según tu prox y tu entorno.
-    const GEMINI_ENDPOINT = '';// e.g. 'https://your-proxy.example.com/gemini'
-    const API_KEY = '';// If you have CORS/proxy set to add Authorization header server-side, leave blank here.
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-    const chatbot = document.getElementById('chatbot');
-    const toggle = document.getElementById('chatbotToggle');
-    const windowEl = document.getElementById('chatbotWindow');
-    const closeBtn = document.getElementById('chatbotClose');
-    const clearBtn = document.getElementById('chatbotClear');
-    const messagesEl = document.getElementById('chatbotMessages');
-    const form = document.getElementById('chatbotForm');
-    const input = document.getElementById('chatbotText');
-    const dot = document.getElementById('chatbotDot');
-
-    // State and persistence
-    let conversation = JSON.parse(localStorage.getItem('chatbot_conversation') || '[]');
-    function saveConversation(){ localStorage.setItem('chatbot_conversation', JSON.stringify(conversation)); }
-
-    function renderMessages(){
-      messagesEl.innerHTML = '';
-      conversation.forEach(msg=>{
-        const div = document.createElement('div');
-        div.className = 'chatbot-msg ' + (msg.role==='user' ? 'user' : 'assistant');
-        div.textContent = msg.content;
-        messagesEl.appendChild(div);
-      });
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-    }
-
-    renderMessages();
-
-    function openChat(){
-      chatbot.setAttribute('aria-expanded','true');
-      windowEl.classList.add('open');
-      windowEl.setAttribute('aria-hidden','false');
-      input.focus();
-    }
-    function closeChat(){
-      chatbot.removeAttribute('aria-expanded');
-      windowEl.classList.remove('open');
-      windowEl.setAttribute('aria-hidden','true');
-    }
-
-    toggle.addEventListener('click', ()=>{
-      if(windowEl.classList.contains('open')) closeChat(); else openChat();
-    });
-    closeBtn.addEventListener('click', closeChat);
-
-    clearBtn.addEventListener('click', ()=>{
-      conversation = [];
-      saveConversation();
-      renderMessages();
-    });
-
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const text = input.value.trim();
-      if(!text) return;
-      // push user message
-      conversation.push({role:'user', content: text});
-      saveConversation();
-      renderMessages();
-      input.value = '';
-
-      // show temporary assistant message
-      const loading = {role:'assistant', content: 'Escribiendo...'};
-      conversation.push(loading);
-      saveConversation();
-      renderMessages();
-
-      try{
-        const reply = await sendMessageToGemini(text);
-        // replace loading message
-        conversation[conversation.length -1] = {role:'assistant', content: reply};
-      }catch(err){
-        console.error(err);
-        conversation[conversation.length -1] = {role:'assistant', content: 'Error: ' + (err.message||err)};
-      }
-      saveConversation();
-      renderMessages();
-      dot.style.display = 'none';
-    });
-
-    async function sendMessageToGemini(userText){
-      // If no endpoint is configured, return a simulated reply (for demo)
-      if(!GEMINI_ENDPOINT){
-        console.warn('GEMINI_ENDPOINT no configurado: usando respuesta simulada para demo.');
-        return 'Simulación: recibí "' + userText + '". Configura `GEMINI_ENDPOINT` para usar Gemini Flash real.';
-      }
-
-      dot.style.display = 'block';
-
-      // Example request body — ajusta según tu proxy/implementación de Gemini Flash
-      const body = {
-        // Ajusta las propiedades a la API de destino (proxy debe adaptar a Gemini Flash)
-        input: userText,
-        // opcionales: temperatura, maxTokens, etc.
-      };
-
-      const headers = { 'Content-Type': 'application/json' };
-      if(API_KEY){ headers['Authorization'] = 'Bearer ' + API_KEY; }
-
-      const resp = await fetch(GEMINI_ENDPOINT, {
-        method: 'POST', headers, body: JSON.stringify(body)
-      });
-
-      if(!resp.ok){
-        const text = await resp.text();
-        throw new Error('Respuesta de servidor: ' + resp.status + ' - ' + text);
-      }
-
-      // Intentar interpretar JSON
-      const data = await resp.json();
-
-      // Dependiendo de tu proxy / Gemini response, ajusta extracción del texto:
-      // ejemplo: { reply: 'texto...' } o { output: { text: '...' } }
-      if(data.reply) return data.reply;
-      if(data.output && typeof data.output === 'string') return data.output;
-      if(data.output && data.output[0] && data.output[0].content) return data.output[0].content;
-
-      // fallback: stringify response
-      return JSON.stringify(data);
-    }
-
-    // Mostrar indicación si hay mensajes no leídos (simple)
-    if(conversation.length>0) dot.style.display = 'block';
-
-    // Accessibility: close on Escape
-    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeChat(); });
-  </script>
-
+        // Active section highlighting
+        window.addEventListener('scroll', () => {
+            const sections = ['inicio', 'habilidades', 'sobre-mi', 'hobbies', 'contacto'];
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        current = section;
+                    }
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active', 'neon-text', 'text-red-500');
+                link.classList.add('text-gray-300');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active', 'neon-text', 'text-red-500');
+                    link.classList.remove('text-gray-300');
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
